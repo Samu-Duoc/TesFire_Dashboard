@@ -1,0 +1,5 @@
+function StatCard({ title, value, caption, icon: Icon, tone }) {
+  return <article className="stat-card"><div className={`stat-icon ${tone}`}><Icon size={20} /></div><div className="stat-copy"><span>{title}</span><strong>{value}</strong><small>{caption}</small></div></article>
+}
+
+export default StatCard
