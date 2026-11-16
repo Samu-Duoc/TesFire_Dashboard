@@ -1,10 +1,11 @@
-import { Activity, BarChart3, Clock3, FileText, Menu, ShieldCheck, WalletCards, X } from 'lucide-react'
+import { Activity, BarChart3, CalendarDays, Clock3, FileText, Menu, ShieldCheck, WalletCards, X } from 'lucide-react'
 import { API_BASE_URL } from '../../services/api'
 
 const menuItems = [
   { label: 'Resumen general', path: '/', icon: BarChart3 },
   { label: 'Movimientos', path: '/movimientos', icon: WalletCards },
   { label: 'Análisis de transacciones', path: '/analisis', icon: Activity },
+  { label: 'Resumen por día', path: '/resumen-dias', icon: CalendarDays },
   { label: 'Historial de ejecuciones', path: '/ejecuciones', icon: Clock3 },
   { label: 'Estado del sistema', path: '/estado', icon: ShieldCheck },
   { label: 'Logs del sistema', path: '/logs', icon: FileText },

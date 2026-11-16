@@ -4,8 +4,9 @@ export const formatDate = (value, includeTime = false) => {
   if (!value) return 'Sin registro'
   const rawValue = String(value)
   const hasTime = rawValue.includes('T')
-  // Date-only movement values have no timezone; noon UTC preserves their calendar day in Chile.
-  const date = new Date(hasTime ? rawValue : `${rawValue}T12:00:00Z`)
+  const hasTimezone = /(?:Z|[+-]\d{2}:?\d{2})$/.test(rawValue)
+  // Date-only movement values use noon UTC; backend timestamps without a zone are UTC.
+  const date = new Date(hasTime ? (hasTimezone ? rawValue : `${rawValue}Z`) : `${rawValue}T12:00:00Z`)
   if (Number.isNaN(date.getTime())) return value
   return new Intl.DateTimeFormat('es-CL', includeTime
     ? {

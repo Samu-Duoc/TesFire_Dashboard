@@ -5,6 +5,7 @@ import LoadingState from './components/common/LoadingState'
 import DashboardPage from './pages/DashboardPage'
 import TransactionsPage from './pages/TransactionsPage'
 import AnalysisPage from './pages/AnalysisPage'
+import DailySummaryPage from './pages/DailySummaryPage'
 import ExecutionsPage from './pages/ExecutionsPage'
 import SystemStatusPage from './pages/SystemStatusPage'
 import LogsPage from './pages/LogsPage'
@@ -15,6 +16,7 @@ const routes = {
   '/': { title: 'Vista general', page: DashboardPage },
   '/movimientos': { title: 'Movimientos', page: TransactionsPage },
   '/analisis': { title: 'Análisis de transacciones', page: AnalysisPage },
+  '/resumen-dias': { title: 'Resumen por día', page: DailySummaryPage },
   '/ejecuciones': { title: 'Historial de ejecuciones', page: ExecutionsPage },
   '/estado': { title: 'Estado del sistema', page: SystemStatusPage },
   '/logs': { title: 'Logs', page: LogsPage },
@@ -42,7 +44,7 @@ function App() {
   const pieData = useMemo(() => getPieData(metrics), [metrics])
   const route = routes[path]
   const Page = route.page
-  const pageProps = { data, metrics, chartData, pieData, amountData, executionStatusData, transactions: data.transactions, executions: data.executions, logs: data.logs, health: data.health, loading, lastUpdated, error, apiStatus }
+  const pageProps = { data, metrics, chartData, pieData, amountData, executionStatusData, transactions: data.transactions, executions: data.executions, logs: data.logs, health: data.health, loading, lastUpdated, error, apiStatus, onNavigate: navigate }
 
   return <MainLayout activePath={path} onNavigate={navigate} onRefresh={loadData} loading={loading} lastUpdated={lastUpdated} error={error} apiStatus={apiStatus} title={route.title}>{loading && !data.transactions.length ? <LoadingState /> : <Page {...pageProps} />}</MainLayout>
 }
