@@ -22,7 +22,7 @@ const routes = {
 
 function App() {
   const [path, setPath] = useState(() => routes[window.location.pathname] ? window.location.pathname : '/')
-  const { data, loading, error, lastUpdated, loadData } = useDashboardData()
+  const { data, loading, error, lastUpdated, loadData, apiStatus } = useDashboardData()
 
   useEffect(() => {
     const handlePopState = () => setPath(routes[window.location.pathname] ? window.location.pathname : '/')
@@ -42,9 +42,9 @@ function App() {
   const pieData = useMemo(() => getPieData(metrics), [metrics])
   const route = routes[path]
   const Page = route.page
-  const pageProps = { data, metrics, chartData, pieData, amountData, executionStatusData, transactions: data.transactions, executions: data.executions, logs: data.logs, health: data.health, loading, lastUpdated, error }
+  const pageProps = { data, metrics, chartData, pieData, amountData, executionStatusData, transactions: data.transactions, executions: data.executions, logs: data.logs, health: data.health, loading, lastUpdated, error, apiStatus }
 
-  return <MainLayout activePath={path} onNavigate={navigate} onRefresh={loadData} loading={loading} lastUpdated={lastUpdated} error={error} title={route.title}>{loading && !data.transactions.length ? <LoadingState /> : <Page {...pageProps} />}</MainLayout>
+  return <MainLayout activePath={path} onNavigate={navigate} onRefresh={loadData} loading={loading} lastUpdated={lastUpdated} error={error} apiStatus={apiStatus} title={route.title}>{loading && !data.transactions.length ? <LoadingState /> : <Page {...pageProps} />}</MainLayout>
 }
 
 export default App

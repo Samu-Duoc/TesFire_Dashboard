@@ -1,4 +1,5 @@
 import { Activity, BarChart3, Clock3, FileText, Menu, ShieldCheck, WalletCards, X } from 'lucide-react'
+import { API_BASE_URL } from '../../services/api'
 
 const menuItems = [
   { label: 'Resumen general', path: '/', icon: BarChart3 },
@@ -20,7 +21,7 @@ function Sidebar({ activePath, onNavigate, isOpen, onClose, onToggle }) {
         <span className="nav-label">Panel de control</span>
         {menuItems.map(({ label, path, icon: Icon }) => <button className={`nav-item ${activePath === path ? 'active' : ''}`} key={path} onClick={() => onNavigate(path)}><Icon size={18} strokeWidth={activePath === path ? 2.4 : 2} /><span>{label}</span></button>)}
       </nav>
-      <div className="sidebar-footer"><div className="connection-dot" /><div><strong>API local</strong><span>127.0.0.1:8000</span></div></div>
+      <div className="sidebar-footer"><div className="connection-dot" /><div><strong>API</strong><span>{API_BASE_URL}</span></div></div>
     </aside>
     </>
   )
